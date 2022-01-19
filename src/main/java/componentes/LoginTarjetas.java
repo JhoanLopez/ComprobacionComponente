@@ -216,7 +216,7 @@ public class LoginTarjetas extends javax.swing.JPanel {
         
         if (!numeros) {
             evt.consume();
-        } else if (tf_cvc.getText().length() >= 16) {
+        } else if (tf_nombreTitular.getText().length() >= 30) {
             evt.consume();      
         } 
     }//GEN-LAST:event_tf_nombreTitularKeyTyped
