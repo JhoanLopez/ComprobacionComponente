@@ -18,27 +18,23 @@ public class TextField extends JTextField implements Serializable{
     
     
     public TextField(){
-         if (getText().isEmpty()) {
-            setEmpty(true);
-            setText(hint);
-        }
-        addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                if (isEmpty()) {
-                    setEmpty(false);
-                    setText(""); 
-                }
-            }
+        super();
+        initialize("");
+    }
 
-            @Override
-            public void focusLost(FocusEvent e) {
-                if (getText().isEmpty()) {
-                    setEmpty(true);
-                    setText(hint); 
-                }
+    @Override
+    protected void printComponent(Graphics g) {        
+        super.paintComponent(g);
+        
+        if((hint != null) && isEmpty() && !hasFocus()) {
+            if(hintColor != null) {
+                g.setColor(hintColor);
+            } else {
+                g.setColor(getForeground().brighter().brighter().brighter());              
             }
-        });
+            int padding = (getHeight() - getFont().getSize()) / 2;
+            g.drawString(hint, 2, getHeight() - padding - 1); 
+        }
     }
     
     
@@ -47,6 +43,7 @@ public class TextField extends JTextField implements Serializable{
     }
 
     public void setHint(String hint) {
+        System.out.print("Color: " + hint);
         this.hint = hint;
     }
 
@@ -66,9 +63,28 @@ public class TextField extends JTextField implements Serializable{
         this.hintColor = hintColor;
     }
     
+    private void initialize (String text) {
+        if (getText().isEmpty()) {
+            setEmpty(true);
+        }
+        addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (isEmpty()) {
+                    setEmpty(false);
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (getText().isEmpty()) {
+                    setEmpty(true);
+                }
+            } 
+        });
+    }
+    
     private String hint;
     private boolean empty;
     private Color hintColor;
-    
-
 }
