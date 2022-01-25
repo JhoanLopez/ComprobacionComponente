@@ -1,6 +1,5 @@
 package componentes;
 
-import static com.sun.java.accessibility.util.AWTEventMonitor.addFocusListener;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.FocusEvent;
@@ -87,7 +86,6 @@ public class TextField extends JTextField implements Serializable{
             g.drawString(hint, 2, getHeight() - padding - 1); 
         }
     }
-    
     
     private String hint;
     private boolean empty;
