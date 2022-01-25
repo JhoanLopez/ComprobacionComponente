@@ -16,25 +16,14 @@ import javax.swing.JTextField;
 
 public class TextField extends JTextField implements Serializable{
     
-    
     public TextField(){
         super();
         initialize("");
     }
-
-    @Override
-    protected void printComponent(Graphics g) {        
-        super.paintComponent(g);
-        
-        if((hint != null) && isEmpty() && !hasFocus()) {
-            if(hintColor != null) {
-                g.setColor(hintColor);
-            } else {
-                g.setColor(getForeground().brighter().brighter().brighter());              
-            }
-            int padding = (getHeight() - getFont().getSize()) / 2;
-            g.drawString(hint, 2, getHeight() - padding - 1); 
-        }
+    
+    public TextField(String text){
+        super();
+        initialize(text);
     }
     
     
@@ -83,6 +72,22 @@ public class TextField extends JTextField implements Serializable{
             } 
         });
     }
+    
+    @Override
+    protected void printComponent(Graphics g) {        
+        super.paintComponent(g);
+        
+        if((hint != null) && isEmpty() && !hasFocus()) {
+            if(hintColor != null) {
+                g.setColor(hintColor);
+            } else {
+                g.setColor(getForeground().brighter().brighter().brighter());              
+            }
+            int padding = (getHeight() - getFont().getSize()) / 2;
+            g.drawString(hint, 2, getHeight() - padding - 1); 
+        }
+    }
+    
     
     private String hint;
     private boolean empty;
